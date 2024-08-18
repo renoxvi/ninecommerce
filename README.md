@@ -17,4 +17,4 @@
 
 
 > [!TIP]
-> Hi everyone today we present you our bot for crypto game 1win with which you can automate the whole process in the game which is possible
+> Hi everyone today we present you our bot for crypto gemzcoin with which you can automate the whole process in the game which is possible
