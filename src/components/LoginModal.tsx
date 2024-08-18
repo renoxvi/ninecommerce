@@ -18,26 +18,41 @@ const LoginModal = ({
   setIsOpen: Dispatch<SetStateAction<boolean>>
   onWalletConnected: (address: string, publicKey: string) => void
 }) => {
-  
-  const handleConnectWallet = async () => {
-    try {
-      const response = await window.okxwallet.aptos.connect()
-      const { address, publicKey } = response
 
-      console.log('Wallet response:', response)
-      
+  const isPetraInstalled = window.aptos;
+
+  const getAptosWallet = () => {
+  if ('aptos' in window) {
+    return window.aptos;
+  } else {
+    window.open('https://petra.app/', `_blank`);
+  }
+};
+
+  const handleConnectWallet = async () => {
+    const wallet = getAptosWallet();
+    if (!wallet) return;
+
+    try {
+      const response = await wallet.connect();
+      // const account = await wallet.account();
+      // console.log(account);
+      const { address, publicKey } = response;
+
+      console.log('Wallet response by me:', response);
+
       if (address && publicKey) {
-        localStorage.setItem('walletAddress', address)
-        localStorage.setItem('publicKey', publicKey)
-        onWalletConnected(address, publicKey)
-        setIsOpen(false)
+        localStorage.setItem('walletAddress', address);
+        localStorage.setItem('publicKey', publicKey);
+        onWalletConnected(address, publicKey);
+        setIsOpen(false);
       } else {
-        console.error('Failed to get address or publicKey')
+        console.error('Failed to get address or publicKey');
       }
     } catch (error) {
-      console.error('Failed to connect wallet:', error)
+      console.error('Failed to connect wallet:', error);
     }
-  }
+  };
 
   return (
     <Dialog onOpenChange={setIsOpen} open={isOpen}>
@@ -66,12 +81,12 @@ const LoginModal = ({
             className={buttonVariants({ variant: 'outline' })}
             onClick={handleConnectWallet}
           >
-            Connect OKX Wallet
+            Connect Petra Wallet
           </button>
         </div>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default LoginModal
+export default LoginModal;
