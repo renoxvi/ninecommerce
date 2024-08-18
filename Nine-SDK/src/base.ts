@@ -1,12 +1,5 @@
-let fetch: typeof globalThis.fetch;
-
-if (typeof window === 'undefined') {
-  // Server-side environment (Node.js)
-  fetch = require('node-fetch');
-} else {
-  // Client-side environment (browser)
-  fetch = require('unfetch');
-}
+//Switches between unfetch & node-fetch for client & server.
+import fetch from "isomorphic-unfetch";
 
 type Config = {
   baseUrl?: string;
@@ -18,7 +11,7 @@ export abstract class Base {
   constructor(config: Config) {
     this.baseUrl = config.baseUrl || "https://nine-ad9w.onrender.com";
   }
-
+  //change to async
   protected async invoke<T>(
     endpoint: string,
     options?: RequestInit,
@@ -36,7 +29,7 @@ export abstract class Base {
       if (!response.ok) {
         const errorBody = await response.json();
         throw new Error(
-          `HTTP error! status:${response.statusText} body:${JSON.stringify(errorBody)}`,
+          `HTTP error! status:${response.statusText} body:${errorBody}`,
         );
       }
       return response.json();
