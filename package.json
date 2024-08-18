@@ -13,6 +13,7 @@
     "@aptos-labs/wallet-adapter-ant-design": "^3.0.10",
     "@okwallet/aptos-wallet-adapter": "^0.0.7",
     "next": "14.2.5",
+    "nine-sdk": "^1.0.6",
     "petra-plugin-wallet-adapter": "^0.4.5",
     "react": "^18",
     "react-dom": "^18"

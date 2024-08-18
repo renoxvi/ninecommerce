@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 import { ArrowRight } from 'lucide-react'
 import { useToast } from '@/components/ui/use-toast'
-import NineSdk from '../../../Nine-SDK/src'  
+import NineSdk from 'nine-sdk'
 
 const ThankYouPage = () => {
   const router = useRouter()
@@ -47,7 +47,7 @@ const ThankYouPage = () => {
       const paymentResponse = await sdk.createRequest({
         requestInfo: {
           expectedAmount: 1, // Amount in cents (e.g., $79.97)
-          payeeAddress: 'payee-wallet-address', 
+          payeeAddress: process.env.NEXT_PUBLIC_PAYEE_ADDRESS, 
           payerAddress: walletAddress,
           timestamp: new Date().toISOString(),
         },
