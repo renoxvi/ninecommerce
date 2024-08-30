@@ -38,7 +38,9 @@ const DesignPreview = ({ params }: { params: { slug: string } }) => {
       setIsLoginModalOpen(true)
     }
   };
-
+  const handlePaypal = () => {
+    router.push('/paypal')
+  }
   const handleWalletConnected = () => {
     router.push('/thank-you')
   }
@@ -138,28 +140,37 @@ const DesignPreview = ({ params }: { params: { slug: string } }) => {
               </div>
 
               <div className='mt-8'>
-                <div className='flex flex-col items-center'>
-                  <p className='font-medium text-gray-700'>Select Phone Color</p>
-                  <div className='mt-4 flex gap-4'>
-                    {['default', 'red', 'blue', 'black'].map(color => (
-                      <button
-                        key={color}
-                        onClick={() => setSelectedColor(color)}
-                        className={`w-10 h-10 rounded-full ${color === selectedColor ? 'border-2 border-black' : ''}`}
-                        style={{ backgroundColor: color === 'default' ? 'green' : color }}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
+  <div className='flex flex-col'>
+    <p className='font-medium text-gray-700'>Select Phone Color</p>
+    <div className='mt-4 flex justify-between items-center'>
+      <div className='flex gap-4'>
+        {['default', 'red', 'blue', 'black'].map(color => (
+          <button
+            key={color}
+            onClick={() => setSelectedColor(color)}
+            className={`w-10 h-10 rounded-full ${color === selectedColor ? 'border-2 border-black' : ''}`}
+            style={{ backgroundColor: color === 'default' ? 'green' : color }}
+          />
+        ))}
+      </div>
+      <div className='flex gap-4'>
+        <Button
+          onClick={handleCheckout}
+          className='ml-4 px-5 sm:px-7 lg:px-9 text-lg hover:bg-slate-500'>
+          Check out with Nine Pay <ArrowRight className='h-4 w-4 ml-1.5 inline' />
+        </Button>
+        <Button
+          onClick={handlePaypal}
+          className='px-5 sm:px-7 lg:px-9 bg-blue-500 hover:bg-gray-400 text-lg'>
+          Check out with PayPal <ArrowRight className='h-4 w-4 ml-1.5 inline' />
+        </Button>
+      </div>
+    </div>
+  </div>
+</div>
 
-              <div className='mt-8 flex justify-end pb-12'>
-                <Button
-                  onClick={handleCheckout}
-                  className='px-4 sm:px-6 lg:px-8'>
-                  Check out <ArrowRight className='h-4 w-4 ml-1.5 inline' />
-                </Button>
-              </div>
+
+              
             </div>
           </div>
         </div>
