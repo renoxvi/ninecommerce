@@ -7,11 +7,21 @@ import { ArrowRight } from 'lucide-react'
 import { useToast } from '@/components/ui/use-toast'
 import NineSdk from 'nine-sdk'
 
-const ThankYouPage = () => {
+const iPhoneDetails = {
+  'iphone-x': { name: 'iPhone X', imgSrc: '/iphone x.png' },
+  'iphone-11': { name: 'iPhone 11', imgSrc: '/iphone 11.png' },
+  'iphone-12': { name: 'iPhone 12', imgSrc: '/iphone 12.png' },
+  'iphone-13': { name: 'iPhone 13', imgSrc: '/iphone 13.png' },
+  'iphone-14': { name: 'iPhone 14', imgSrc: '/iphone 14.png' },
+  'iphone-15': { name: 'iPhone 15', imgSrc: '/iphone 15.png' },
+};
+
+const ThankYouPage = ({ params }: { params: { slug: string } }) => {
   const router = useRouter()
   const [paymentStatus, setPaymentStatus] = useState<'idle' | 'pending' | 'success' | 'error'>('idle')
   const { toast } = useToast()
   
+  const iPhone = iPhoneDetails[params.slug];
   
   const [walletAddress, setWalletAddress] = useState<string | null>(null)
 
@@ -46,7 +56,7 @@ const ThankYouPage = () => {
       // Create the payment request
       const paymentResponse = await sdk.createRequest({
         requestInfo: {
-          expectedAmount: 1, // Amount in cents (e.g., $79.97)
+          expectedAmount: 10, // Amount in cents (e.g., $79.97)
           payeeAddress: process.env.NEXT_PUBLIC_PAYEE_ADDRESS, 
           payerAddress: walletAddress,
           timestamp: new Date().toISOString(),
@@ -65,6 +75,7 @@ const ThankYouPage = () => {
           description: 'Thank you for your purchase! Your payment has been processed.',
           variant: 'success',
         })
+        console.log("Payment feedback", paymentResponse)
         // Redirect to receipt page if needed
         router.push('/receipt')
       } else {
@@ -84,7 +95,11 @@ const ThankYouPage = () => {
       })
     }
   }
-
+  const truncateAddress = (address: string) => {
+    return address.length > 10
+      ? `${address.slice(0, 6)}...${address.slice(-4)}`
+      : address
+  }
   return (
     <div className='container mx-auto p-4'>
       <h1 className='text-3xl font-bold mb-4'>Thank You for Your Order!</h1>
@@ -96,7 +111,7 @@ const ThankYouPage = () => {
         <h2 className='text-2xl font-semibold mb-4'>Order Summary</h2>
         <div className='flex justify-between mb-2'>
           <span className='font-medium'>Base price:</span>
-          <span>$49.99</span>
+          <span>$999.99</span>
         </div>
         <div className='flex justify-between mb-2'>
           <span className='font-medium'>Textured finish:</span>
@@ -109,7 +124,7 @@ const ThankYouPage = () => {
         <div className='my-2 h-px bg-gray-200' />
         <div className='flex justify-between font-semibold'>
           <span>Order Total:</span>
-          <span>$79.97</span>
+          <span>$1029.97</span>
         </div>
       </div>
 
@@ -117,7 +132,7 @@ const ThankYouPage = () => {
       {walletAddress && (
         <div className='text-center mb-4'>
           <p className='text-lg font-medium'>Connected Wallet:</p>
-          <p className='text-gray-700'>{walletAddress}</p>
+          <p className='text-gray-700'>{truncateAddress(walletAddress)}</p>
         </div>
       )}
 
@@ -125,7 +140,7 @@ const ThankYouPage = () => {
         <Button
           onClick={handlePayment}
           className='px-6 py-3 bg-green-600 text-white hover:bg-green-700'>
-          {paymentStatus === 'pending' ? 'Processing...' : 'Complete Payment'}
+          {paymentStatus === 'pending' ? 'Processing...' : 'Send Payment Request'}
           <ArrowRight className='h-4 w-4 ml-2 inline' />
         </Button>
       </div>
