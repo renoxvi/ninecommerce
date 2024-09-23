@@ -56,7 +56,7 @@ const ThankYouPage = ({ params }: { params: { slug: string } }) => {
       // Create the payment request
       const paymentResponse = await sdk.createRequest({
         requestInfo: {
-          expectedAmount: 10, // Amount in cents (e.g., $79.97)
+          expectedAmount: 1, // Amount in cents (e.g., $79.97)
           payeeAddress: process.env.NEXT_PUBLIC_PAYEE_ADDRESS, 
           payerAddress: walletAddress,
           timestamp: new Date().toISOString(),
