@@ -40,7 +40,7 @@ const ThankYouPage = ({ params }: { params: { slug: string } }) => {
       toast({
         title: 'Wallet not connected',
         description: 'Please connect your wallet before proceeding with the payment.',
-        variant: 'error',
+        variant: 'destructive',
       })
       return
     }
@@ -53,10 +53,10 @@ const ThankYouPage = ({ params }: { params: { slug: string } }) => {
         baseUrl: 'https://nine-ad9w.onrender.com', 
       })
 
-      // Create the payment request
+      // Create the request
       const paymentResponse = await sdk.createRequest({
         requestInfo: {
-          expectedAmount: 10, // Amount in cents (e.g., $79.97)
+          expectedAmount: 2, 
           payeeAddress: process.env.NEXT_PUBLIC_PAYEE_ADDRESS, 
           payerAddress: walletAddress,
           timestamp: new Date().toISOString(),
@@ -73,7 +73,7 @@ const ThankYouPage = ({ params }: { params: { slug: string } }) => {
         toast({
           title: 'Payment Successful',
           description: 'Thank you for your purchase! Your payment has been processed.',
-          variant: 'success',
+          variant: 'default',
         })
         console.log("Payment feedback", paymentResponse)
         // Redirect to receipt page if needed
@@ -83,7 +83,7 @@ const ThankYouPage = ({ params }: { params: { slug: string } }) => {
         toast({
           title: 'Payment Failed',
           description: 'There was an issue processing your payment. Please try again.',
-          variant: 'error',
+          variant: 'destructive',
         })
       }
     } catch (error) {
@@ -91,8 +91,9 @@ const ThankYouPage = ({ params }: { params: { slug: string } }) => {
       toast({
         title: 'Payment Error',
         description: 'An unexpected error occurred. Please try again later.',
-        variant: 'error',
+        variant: 'destructive',
       })
+      console.error('Payment error:', error) ;
     }
   }
   const truncateAddress = (address: string) => {
