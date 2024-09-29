@@ -57,7 +57,7 @@ const ThankYouPage = ({ params }: { params: { slug: string } }) => {
       const paymentResponse = await sdk.createRequest({
         requestInfo: {
           expectedAmount: 1, // Amount in cents (e.g., $79.97)
-          payeeAddress: process.env.NEXT_PUBLIC_PAYEE_ADDRESS, 
+          payeeAddress: process.env.NEXT_PUBLIC_PAYEE_ADDRESS as string, 
           payerAddress: walletAddress,
           timestamp: new Date().toISOString(),
         },
@@ -73,9 +73,10 @@ const ThankYouPage = ({ params }: { params: { slug: string } }) => {
         toast({
           title: 'Payment Successful',
           description: 'Thank you for your purchase! Your payment has been processed.',
-          variant: 'success',
+          variant: 'default',
         })
         console.log("Payment feedback", paymentResponse)
+       
         // Redirect to receipt page if needed
         router.push('/receipt')
       } else {
@@ -83,7 +84,7 @@ const ThankYouPage = ({ params }: { params: { slug: string } }) => {
         toast({
           title: 'Payment Failed',
           description: 'There was an issue processing your payment. Please try again.',
-          variant: 'error',
+          variant: 'destructive',
         })
       }
     } catch (error) {
@@ -91,8 +92,9 @@ const ThankYouPage = ({ params }: { params: { slug: string } }) => {
       toast({
         title: 'Payment Error',
         description: 'An unexpected error occurred. Please try again later.',
-        variant: 'error',
+        variant: 'destructive',
       })
+      console.log("error", error)
     }
   }
   const truncateAddress = (address: string) => {
@@ -111,20 +113,20 @@ const ThankYouPage = ({ params }: { params: { slug: string } }) => {
         <h2 className='text-2xl font-semibold mb-4'>Order Summary</h2>
         <div className='flex justify-between mb-2'>
           <span className='font-medium'>Base price:</span>
-          <span>$999.99</span>
+          <span>120 APT</span>
         </div>
         <div className='flex justify-between mb-2'>
           <span className='font-medium'>Textured finish:</span>
-          <span>$9.99</span>
+          <span>1 APT</span>
         </div>
         <div className='flex justify-between mb-2'>
           <span className='font-medium'>Soft polycarbonate material:</span>
-          <span>$19.99</span>
+          <span>2 APT</span>
         </div>
         <div className='my-2 h-px bg-gray-200' />
         <div className='flex justify-between font-semibold'>
           <span>Order Total:</span>
-          <span>$1029.97</span>
+          <span>123 APT</span>
         </div>
       </div>
 

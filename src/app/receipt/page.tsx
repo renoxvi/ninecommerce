@@ -11,11 +11,11 @@ const ReceiptPage = () => {
     orderId: '123456',
     orderDate: new Date().toLocaleDateString(),
     items: [
-      { name: 'Base price', price: '$999.99' },
-      { name: 'Textured finish', price: '$9.99' },
-      { name: 'Soft polycarbonate material', price: '$19.99' },
+      { name: 'Base price', price: '120 APT' },
+      { name: 'Textured finish', price: '1 APT' },
+      { name: 'Soft polycarbonate material', price: '2 APT' },
     ],
-    totalAmount: '$1029.97',
+    totalAmount: '123 APT',
     paymentStatus: 'Success',
   })
 

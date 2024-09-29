@@ -110,21 +110,21 @@ const DesignPreview = ({ params }: { params: { slug: string } }) => {
                   <div className='flex items-center justify-between py-1 mt-2'>
                     <p className='text-gray-600'>Price</p>
                     <p className='font-medium text-gray-900'>
-                      $999.99
+                      120 APT
                     </p>
                   </div>
 
                   <div className='flex items-center justify-between py-1 mt-2'>
                     <p className='text-gray-600'>Textured finish</p>
                     <p className='font-medium text-gray-900'>
-                      $9.99
+                      1 APT
                     </p>
                   </div>
 
                   <div className='flex items-center justify-between py-1 mt-2'>
                     <p className='text-gray-600'>Soft polycarbonate material</p>
                     <p className='font-medium text-gray-900'>
-                      $19.99
+                      2 APT
                     </p>
                   </div>
 
@@ -133,7 +133,7 @@ const DesignPreview = ({ params }: { params: { slug: string } }) => {
                   <div className='flex items-center text-base justify-between py-2'>
                     <p className='font-semibold text-gray-900'>Order total</p>
                     <p className='font-semibold text-gray-900'>
-                    $1029.97
+                    123 APT
                     </p>
                   </div>
                 </div>
