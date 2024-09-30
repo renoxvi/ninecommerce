@@ -50,7 +50,7 @@ const ThankYouPage = ({ params }: { params: { slug: string } }) => {
     try {
       // Initialize the SDK
       const sdk = new NineSdk({
-        baseUrl: 'https://nine-ad9w.onrender.com', 
+        baseUrl: 'https://nine-ad9w.onrender.com/', 
       })
 
       // Create the payment request
